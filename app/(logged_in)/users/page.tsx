@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import DailyChart from "./DailyChart";
-import WeeklyChart from "./WeeklyChart";
-import MonthlyChart from "./MonthlyChart";
-import UserCommentsTable from "./UserComment";
+import DailyChart from "../../components/shared/cards/DailyChart";
+import WeeklyChart from "../../components/shared/cards/WeeklyChart";
+import MonthlyChart from "../../components/shared/cards/MonthlyChart";
+import UserCommentsTable from "../../components/shared/cards/UserComment";
 
 const commentsData = [
   { user_id: 2, comment: "Not satisfied.", created_at: "2024-03-20 15:00:00" },
@@ -15,11 +15,12 @@ const commentsData = [
 
 const UsersAuthChart: React.FC = () => {
   return (
-    <div className="bg-[#1E1E1E] p-6 rounded-lg text-white w-full h-full flex gap-6">
-      {/* Section principale */}
-      <div className="w-2/3 flex flex-col">
+    <div className="bg-[#1E1E1E] w-full">
+    <div className="bg-[#1E1E1E] p-6 rounded-lg text-white w-full  flex gap-6">
+      
+      <div className="w-2/3 flex flex-col h-full">
         {/* Graphique quotidien */}
-        <div className="bg-[#262626] p-6 rounded-xl shadow">
+        <div className="bg-[#1E1E1E] p-6 rounded-xl shadow">
           <h3 className="text-xl font-semibold mb-4">Utilisateurs actifs (Quotidien)</h3>
           <DailyChart />
           <UserCommentsTable data={commentsData} />
@@ -43,6 +44,7 @@ const UsersAuthChart: React.FC = () => {
           <MonthlyChart />
         </div>
       </div>
+    </div>
     </div>
   );
 };
