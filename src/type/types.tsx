@@ -23,4 +23,13 @@ export interface Product {
     totalQuotationsCreated: number;
     averageProductsPerQuotation: number;
     averageQuotationValue: number;
+    newCustomers: number;
+    existingCustomers: number;
+    totalCustomers: number;
+    CustomerRetentionRate: number;
+    
   }
+
+  
+  
+  

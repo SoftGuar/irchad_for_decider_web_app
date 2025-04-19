@@ -31,3 +31,6 @@ export async function daily_active() {
         if (!response.ok) throw new Error("Failed to fetch daily active users data");
         return response.json();
     }
+
+
+    

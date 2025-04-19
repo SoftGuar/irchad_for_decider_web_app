@@ -5,7 +5,7 @@ import DailyChart from "../../components/cards/DailyChart";
 import WeeklyChart from "../../components/cards/WeeklyChart";
 import MonthlyChart from "../../components/cards/MonthlyChart";
 import UserCommentsTable from "../../components/cards/UserComment";
-
+import Image from "next/image";
 import { feedback } from "../../../services/usersApi"; // adjust path as needed
 
 const UsersAuthChart: React.FC = () => {
@@ -30,6 +30,16 @@ const UsersAuthChart: React.FC = () => {
   }, []);
 
   return (
+      <div className="bg-black h-screen w-full relative overflow-y-scroll">
+          <div className="absolute h-1/3 w-full rounded-b-lg overflow-hidden ">
+            <Image src="/images/login_image.png" alt="Background" layout="fill" objectFit="cover" quality={100} priority className="rounded-b-lg" />
+            <div className="absolute top-1/2 left-10 transform -translate-y-1/2 text-white">
+              <h1 className="text-4xl font-bold drop-shadow-lg">Quotations</h1>
+              <p className="text-lg drop-shadow-md"></p>
+            </div>
+          </div>
+    
+          <div className="relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-2/5 bg-transparent p-6 w-full mt-36"></div>
     <div className="bg-[#1E1E1E] w-full">
       <div className="bg-[#1E1E1E] p-6 rounded-lg text-white w-full flex gap-6">
         <div className="w-2/3 flex flex-col h-full">
@@ -59,6 +69,7 @@ const UsersAuthChart: React.FC = () => {
             <MonthlyChart />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

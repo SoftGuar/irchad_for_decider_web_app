@@ -1,26 +1,41 @@
-"use client";
+'use client';
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useUser } from '../../utils/userContext';
 import { authApi } from '../../services/authapi';
 
 export default function LoginPage() {
+  const { setUser } = useUser();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
+    setError('');
 
     try {
-      const data = await authApi.login(email, password);
-      localStorage.setItem('token', data.data.token);
-      window.location.href = '/'; // Rediriger après connexion
-    } catch (err: any) {
-      setError(err.message);
+      const response = await authApi.login(email, password);
+
+      if (response.token && response.user) {
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        document.cookie = `token=${response.token}; path=/; max-age=${60 * 60 * 24}`;
+
+        setUser(response.user);
+        router.push('/(logged_in)');
+      } else {
+        setError('Invalid response from server');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Invalid email or password');
     } finally {
       setLoading(false);
     }
@@ -38,7 +53,11 @@ export default function LoginPage() {
           <h1 className="text-3xl font-semibold mb-4 text-center">Sign In</h1>
           <p className="text-gray-400 text-center mb-6">Sign in to stay connected.</p>
 
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+          {error && (
+            <div className="mb-4 p-3 bg-red-500/20 text-red-500 rounded-lg text-sm">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -69,7 +88,7 @@ export default function LoginPage() {
             </div>
             <button
               type="submit"
-              className="w-full bg-[#FF8B00] p-3 rounded-lg font-semibold text-black"
+              className="w-full bg-[#FF8B00] p-3 rounded-lg font-semibold text-black disabled:opacity-50"
               disabled={loading}
             >
               {loading ? 'Signing in...' : 'Sign in'}
@@ -84,6 +103,7 @@ export default function LoginPage() {
           alt="Background Image"
           layout="fill"
           objectFit="cover"
+          priority
         />
       </div>
     </div>

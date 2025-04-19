@@ -77,3 +77,15 @@ export async function fetchAverageQuotationValue() {
   if (!response.ok) throw new Error("Failed to fetch average quotation value");
   return response.json();
 }
+
+export async function salesdetails() {
+  const response = await fetch(`${API_URL}/analytics/sales-stats/crr/details`);
+  if (!response.ok) throw new Error("Failed to fetch Customer Retention Rate data");
+  return response.json();
+}
+
+export async function totalvaluebyproduct() {
+  const response = await fetch(`${API_URL}/analytics/quotations/total-value-by-product`);
+  if (!response.ok) throw new Error("Failed to fetch totalvaluebyproduct data");
+  return response.json();
+}

@@ -33,8 +33,14 @@ export async function topvisitedPOIs() {
     if (!response.ok) throw new Error("Failed to fetch most-rerouting-requests data");
     return response.json();
   }
+  export async function successrateofnavigations() {
+    const response = await fetch(`${API_URL}/analytics/navigation/successful`);
+    if (!response.ok) throw new Error("Failed to fetch success rate of navigations data");
+    return response.json();
+  }
 
-  export async function navigationLogs() {
+  export async function navigationLogs() 
+  {
     const response = await fetch(`${API_URL}/analytics/navigation/logs`);
     if (!response.ok) throw new Error("Failed to fetch navigation logs data ");
     return response.json();
