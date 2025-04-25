@@ -7,7 +7,7 @@ import { User } from "../../../../type/user";
 import { userApi } from "../../../../services/useraccount";
 
 const Navbar = () => {
-  const { user, fetchUser } = useUser();
+const { user, fetchUser } = useUser();
   const router = useRouter()
 
   return (

@@ -45,6 +45,7 @@ const TestDeviceStatus = () => {
   }, []);
   
     return (
+      
       <div className="flex flex-col min-h-screen w-full bg-[#121212] p-6 space-y-6 overflow-auto text-white">
       {/* Section 1: État des dispositifs (Devices Status) */}
       

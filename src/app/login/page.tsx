@@ -19,17 +19,24 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
-
+    window.onload = () => {
+      localStorage.clear();
+    };
+    
     try {
       const response = await authApi.login(email, password);
-
-      if (response.token && response.user) {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        document.cookie = `token=${response.token}; path=/; max-age=${60 * 60 * 24}`;
-
-        setUser(response.user);
-        router.push('/(logged_in)');
+      console.log('Login response:',  response);
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        const user = await authApi.getCurrentUser();
+       
+        console.log('User data:', user.data);
+       
+        localStorage.setItem('user', JSON.stringify(user.data));
+        document.cookie = `token=${response.data.token}; path=/; max-age=${60 * 60 * 24}`;
+        
+    setUser(user.data);
+        router.push('/users_dashboard');
       } else {
         setError('Invalid response from server');
       }

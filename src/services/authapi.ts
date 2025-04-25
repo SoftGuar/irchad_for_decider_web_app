@@ -7,6 +7,6 @@ export const authApi = {
     return await apiService.post('/login', { email, password, role: 'admin' });
   },
   getCurrentUser: async (): Promise<ApiResponse<User>> => {
-    return await apiService.get('/account');
+    return await apiService.get('/account/');
   },
 };

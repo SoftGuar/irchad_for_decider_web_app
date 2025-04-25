@@ -1,13 +1,12 @@
 export interface User {
-    id: number;
-    first_name: string;
-    last_name: string;
-    email: string;
-    phone: string;
-    // addingDate: string;
-    // lastEdited: string;
-  }
-  
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  // addingDate: string;
+  // lastEdited: string;
+}
 export interface UsersResponse {
     success: boolean;
     data: User[];
