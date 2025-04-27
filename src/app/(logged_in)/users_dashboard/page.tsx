@@ -318,6 +318,7 @@ yPos = drawChartInPDF(
           theme: 'grid',
           headStyles: { 
             fillColor: [51, 122, 183],
+            
             textColor: [255, 255, 255],
             fontStyle: 'bold',
             fontSize: 10

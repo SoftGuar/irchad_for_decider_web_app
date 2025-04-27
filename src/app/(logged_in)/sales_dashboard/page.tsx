@@ -66,7 +66,7 @@ const Dashboard: React.FC = () => {
           averageTimeToConversion: `${averageTimeToConversionData.averageTimeToConversion} days`,
           mostQuotedProducts: mostQuotedProductsData.map((item: any) => ({
             product_id: item.product_id,
-            name: item.name,
+            name: item.product_id,
             count: item.count
           })),
           productConversionRates: productConversionRatesData.map((item: any) => ({
@@ -92,7 +92,7 @@ const Dashboard: React.FC = () => {
           totalCustomers: SalesDetailsData.total_customers,
           CustomerRetentionRate: SalesDetailsData.retention_rate,
         });
-
+console.log ("fffff",productConversionRatesData),
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -154,7 +154,11 @@ const Dashboard: React.FC = () => {
         head: [kpiData[0]],
         body: kpiData.slice(1),
         theme: 'grid',
-        headStyles: { fillColor: [66, 66, 66] }
+        headStyles: {
+          fillColor: [51, 122, 183],
+          textColor: [255, 255, 255], // White text
+        },
+        
       });
       
       // Most Quoted Products table
@@ -164,7 +168,7 @@ const Dashboard: React.FC = () => {
       
       const mostQuotedData = [
         ["Product", "Count"],
-        ...data.mostQuotedProducts.map(item => [item.name || '', item.count || 0])
+        ...data.mostQuotedProducts.map(item => [item.product_id || '', item.count || 0])
       ];
       
       autoTable(pdf, {
@@ -172,7 +176,14 @@ const Dashboard: React.FC = () => {
         head: [mostQuotedData[0]],
         body: mostQuotedData.slice(1),
         theme: 'grid',
-        headStyles: { fillColor: [66, 66, 66] }
+        headStyles: {
+          fillColor: [51, 122, 183],
+          textColor: [255, 255, 255], // White text
+        },
+        columnStyles: {
+          0: { cellWidth: 60 },  // First column takes 50% of the table width
+          1: { cellWidth: 60 },  // Second column takes 50% of the table width
+        },
       });
       
       // Product Conversion Rates table
@@ -190,7 +201,14 @@ const Dashboard: React.FC = () => {
         head: [conversionData[0].map(cell => cell ?? '')],
         body: conversionData.slice(1).map(row => row.map(cell => cell ?? '')),
         theme: 'grid',
-        headStyles: { fillColor: [66, 66, 66] }
+        headStyles: {
+          fillColor: [51, 122, 183],
+          textColor: [255, 255, 255], // White text
+        },
+        columnStyles: {
+          0: { cellWidth: 60 },  // First column takes 50% of the table width
+          1: { cellWidth: 60 },  // Second column takes 50% of the table width
+        },
       });
       
       // Clients with Most Unconverted Quotations
@@ -208,7 +226,14 @@ const Dashboard: React.FC = () => {
         head: [clientsData[0]],
         body: clientsData.slice(1),
         theme: 'grid',
-        headStyles: { fillColor: [66, 66, 66] }
+        headStyles: {
+          fillColor: [51, 122, 183],
+          textColor: [255, 255, 255], // White text
+        },
+        columnStyles: {
+          0: { cellWidth: 60 },  // First column takes 50% of the table width
+          1: { cellWidth: 60 },  // Second column takes 50% of the table width
+        },
       });
       
       // Total Value by Product
@@ -229,7 +254,10 @@ const Dashboard: React.FC = () => {
         head: [valueData[0]],
         body: valueData.slice(1),
         theme: 'grid',
-        headStyles: { fillColor: [66, 66, 66] }
+        headStyles: {
+          fillColor: [51, 122, 183],
+          textColor: [255, 255, 255], // White text
+        },
       });
       
       // Recommendations section
