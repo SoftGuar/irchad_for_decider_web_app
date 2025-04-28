@@ -599,7 +599,7 @@ const TestDeviceStatus = () => {
       <div className="absolute h-1/3 w-full rounded-b-lg overflow-hidden ">
         <Image src="/images/login_image.png" alt="Background" layout="fill" objectFit="cover" quality={100} priority className="rounded-b-lg" />
         <div className="absolute top-1/2 left-10 transform -translate-y-1/2 text-white">
-          <h1 className="text-4xl font-bold drop-shadow-lg">Quotations</h1>
+          <h1 className="text-4xl font-bold drop-shadow-lg">Zones & navigation Informations</h1>
           <p className="text-lg drop-shadow-md"></p>
           
           {/* Add PDF Generation Button */}
@@ -636,14 +636,14 @@ const TestDeviceStatus = () => {
         {/* Section 3: Comprehensive Analytics */}
         <section className="w-full max-w-6xl mx-auto bg-[#1E1E1E] p-6 rounded-lg shadow-md">
           <h2 className="text-xl text-white font-semibold mb-4 border-b border-gray-700 pb-2">
-            Analyse détaillée
+          Detailed Analysis
           </h2>
     
           {/* Main Grid */}
           <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
             {/* Large Chart on Top - Full Width */}
             <div className="w-full bg-[#262626] p-6 rounded-xl shadow">
-              <h3 className="text-lg text-white font-semibold mb-3">Temps moyen passé par zone</h3>
+              <h3 className="text-lg text-white font-semibold mb-3"> </h3>
               <TimeSpentChart data={timeSpentData} />
             </div>
           </div>
@@ -651,12 +651,12 @@ const TestDeviceStatus = () => {
           {/* Two Charts Side by Side (Each takes half of the screen) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             <div className="bg-[#262626] p-6 rounded-xl shadow">
-              <h3 className="text-lg text-white font-semibold mb-3">Points d'intérêt principaux</h3>
+              <h3 className="text-lg text-white font-semibold mb-3">Main Points of Interest</h3>
               <TopVisitedPOIs />
             </div>
     
             <div className="bg-[#262626] p-6 rounded-xl shadow">
-              <h3 className="text-lg text-white font-semibold mb-3">Zones avec le plus d'obstacles</h3>
+              <h3 className="text-lg text-white font-semibold mb-3">Areas with the Most Obstacles</h3>
               <ObstaclesBarChart />
             </div>
           </div>
@@ -665,14 +665,14 @@ const TestDeviceStatus = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
             {/* Navigation Logs - Takes 2/4 of the screen */}
             <div className="md:col-span-2 bg-[#262626] p-6 rounded-xl shadow">
-              <h3 className="text-lg text-white font-semibold mb-3">Journaux de navigation</h3>
+              <h3 className="text-lg text-white font-semibold mb-3">Navigation Logs</h3>
               {/* Note: You might need to update your NavigationLogsTable component as well */}
               <NavigationLogsTable data={logsData} />
             </div>
     
             {/* Rerouting Chart - Takes 1/3 of the screen */}
             <div className="bg-[#262626] p-6 rounded-xl shadow">
-              <h3 className="text-lg text-white font-semibold mb-3">Environnements avec le plus de réacheminements</h3>
+              <h3 className="text-lg text-white font-semibold mb-3">Successful Navigations</h3>
               <ReroutingBarChart />
               <div className="bg-[#1a1a1a] p-4 rounded-lg shadow-inner border border-gray-700 mt-22">
                 <h4 className="text-md text-white font-semibold mb-2">Navigations réussies</h4>

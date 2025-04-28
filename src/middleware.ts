@@ -6,8 +6,11 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isLoginPage = pathname === '/login';
-
+   
   if (isLoginPage && token) {
+    return NextResponse.redirect(new URL('/users_dashboard', request.url));
+  }
+  else if (pathname === '/') {
     return NextResponse.redirect(new URL('/users_dashboard', request.url));
   }
    
