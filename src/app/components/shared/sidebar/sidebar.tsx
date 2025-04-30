@@ -1,7 +1,7 @@
- "use client";
+"use client";
 
 import { useState } from "react";
-import { LayoutGrid, Users, MapPin } from "lucide-react";
+import { LayoutGrid, Users, MapPin, User } from "lucide-react";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -60,6 +60,20 @@ const Sidebar = () => {
         >
           <MapPin className="w-5 h-5" />
           <span>Zones Dashboard</span>
+        </Link>
+
+        {/* Profile */}
+        <Link
+          href="/profile"
+          className={`flex items-center gap-2 text-sm px-3 py-2 rounded-md ${
+            selectedMain === "profile"
+              ? "bg-[#FF8B00]/[0.64]"
+              : "text-gray-300 hover:text-white"
+          }`}
+          onClick={() => handleMainClick("profile")}
+        >
+          <User className="w-5 h-5" />
+          <span>Profile</span>
         </Link>
       </nav>
     </div>
