@@ -522,7 +522,7 @@ yPos = drawChartInPDF(
           <div className="bg-[#1E1E1E] p-6 rounded-lg text-white w-full flex gap-6">
             <div className="w-2/3 flex flex-col h-full">
               <div className="bg-[#1E1E1E] p-6 rounded-xl shadow">
-                <h3 className="text-xl font-semibold mb-4 ">Active Users (Daily)</h3>
+                <h3 className="text-xl font-semibold mb-4 mt-8">Active Users (Daily)</h3>
                 <DailyChart />
                 {loading ? (
                   <p className="mt-4">Loading comments...</p>
@@ -535,7 +535,7 @@ yPos = drawChartInPDF(
             </div>
 
             <div className="w-1/3 flex flex-col gap-6">
-              <div className="bg-[#262626] p-4 rounded-xl shadow">
+              <div className="bg-[#262626] p-4 rounded-xl shadow mt-8">
                 <h3 className="text-lg font-semibold mb-3">Active Users (Weekly)</h3>
                 <WeeklyChart />
               </div>

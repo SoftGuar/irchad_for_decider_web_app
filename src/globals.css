@@ -135,3 +135,11 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
 }
 
+nextjs-portal {
+  display: none;
+}
+
+body {
+  padding: 0 !important; 
+  overflow: auto !important;
+}

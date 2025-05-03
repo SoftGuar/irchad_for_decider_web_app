@@ -19,34 +19,36 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
-    window.onload = () => {
-      localStorage.clear();
-    };
-    
+  
     try {
       const response = await authApi.login(email, password);
-      console.log('Login response:',  response);
-      if (response.data.token) {
+  
+      if (response?.data?.token) {
         localStorage.setItem('token', response.data.token);
         const user = await authApi.getCurrentUser();
-       
-        console.log('User data:', user.data);
-       
+  
         localStorage.setItem('user', JSON.stringify(user.data));
         document.cookie = `token=${response.data.token}; path=/; max-age=${60 * 60 * 24}`;
-        
-    setUser(user.data);
+  
+        setUser(user.data);
         router.push('/users_dashboard');
       } else {
-        setError('Invalid response from server');
+        setError('Something went wrong. Please try again.');
       }
-    } catch (err) {
-      console.error('Login error:', err);
-      setError('Invalid email or password');
+    } catch (err: any) {
+      console.error('Login failed:', err);
+  
+      // Optional: Check for specific error response codes
+      if (err?.response?.status === 401) {
+        setError('Invalid email or password.');
+      } else {
+        setError('Unable to login. Please try again later.');
+      }
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="flex h-screen w-screen overflow-hidden">

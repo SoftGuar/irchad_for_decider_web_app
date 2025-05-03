@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { LayoutGrid, Users, MapPin, User } from "lucide-react";
 import Link from "next/link";
 
 const Sidebar = () => {
-  const [selectedMain, setSelectedMain] = useState("sales_dashboard");
+  // Use the current pathname instead of local state
+  const pathname = usePathname();
 
-  const handleMainClick = (item: string) => {
-    setSelectedMain(item);
+  // Map of routes we want to highlight
+  const routes = {
+    sales_dashboard: "/sales_dashboard",
+    users_dashboard: "/users_dashboard",
+    zones_dashboard: "/zones_dashboard",
+    profile: "/profile",
   };
 
   return (
@@ -24,11 +29,10 @@ const Sidebar = () => {
         <Link
           href="/sales_dashboard"
           className={`flex items-center gap-2 text-sm px-3 py-2 rounded-md ${
-            selectedMain === "sales_dashboard"
-              ? "bg-[#FF8B00]/[0.64]"
+            pathname === "/sales_dashboard"
+              ? "bg-[#FF8B00]/[0.64] text-white"
               : "text-gray-300 hover:text-white"
           }`}
-          onClick={() => handleMainClick("sales_dashboard")}
         >
           <LayoutGrid className="w-5 h-5" />
           <span>Sales Dashboard</span>
@@ -38,11 +42,10 @@ const Sidebar = () => {
         <Link
           href="/users_dashboard"
           className={`flex items-center gap-2 text-sm px-3 py-2 rounded-md ${
-            selectedMain === "users_dashboard"
-              ? "bg-[#FF8B00]/[0.64]"
+            pathname === "/users_dashboard"
+              ? "bg-[#FF8B00]/[0.64] text-white"
               : "text-gray-300 hover:text-white"
           }`}
-          onClick={() => handleMainClick("users_dashboard")}
         >
           <Users className="w-5 h-5" />
           <span>Users Dashboard</span>
@@ -52,11 +55,10 @@ const Sidebar = () => {
         <Link
           href="/zones_dashboard"
           className={`flex items-center gap-2 text-sm px-3 py-2 rounded-md ${
-            selectedMain === "zones_dashboard"
-              ? "bg-[#FF8B00]/[0.64]"
+            pathname === "/zones_dashboard"
+              ? "bg-[#FF8B00]/[0.64] text-white"
               : "text-gray-300 hover:text-white"
           }`}
-          onClick={() => handleMainClick("zones_dashboard")}
         >
           <MapPin className="w-5 h-5" />
           <span>Zones Dashboard</span>
@@ -66,11 +68,10 @@ const Sidebar = () => {
         <Link
           href="/profile"
           className={`flex items-center gap-2 text-sm px-3 py-2 rounded-md ${
-            selectedMain === "profile"
-              ? "bg-[#FF8B00]/[0.64]"
+            pathname === "/profile"
+              ? "bg-[#FF8B00]/[0.64] text-white"
               : "text-gray-300 hover:text-white"
           }`}
-          onClick={() => handleMainClick("profile")}
         >
           <User className="w-5 h-5" />
           <span>Profile</span>
