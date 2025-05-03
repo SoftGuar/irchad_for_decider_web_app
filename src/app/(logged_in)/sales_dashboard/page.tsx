@@ -365,6 +365,21 @@ console.log ("fffff",productConversionRatesData),
     
     setGeneratingPDF(false);
   };
+  if (loading && !data) {
+    return <p>Loading dashboard...</p>;
+  }
+
+  if (!data) {
+    return  (
+      <div className="bg-black min-h-screen w-full overflow-y-auto">
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-white text-center text-2xl">No data available</h1>
+      </div>    
+      </div>)    
+   
+ 
+  }
+
 
   return (
     <div className="bg-black min-h-screen w-full overflow-y-auto">
