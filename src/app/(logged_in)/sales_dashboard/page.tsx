@@ -21,6 +21,7 @@ import {
   totalvaluebyproduct
 } from "../../../services/AnalyticsApi";
 import { useUser } from "@/src/utils/userContext";
+import { ClipLoader } from "react-spinners";
 
 const Dashboard: React.FC = () => {
   const [data, setData] = useState<AnalyticsData | null>(null);
@@ -88,20 +89,18 @@ const Dashboard: React.FC = () => {
           totalCustomers: SalesDetailsData.total_customers,
           CustomerRetentionRate: SalesDetailsData.retention_rate,
         });
-console.log ("fffff",productConversionRatesData),
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
       }
     };
-
     fetchAllData();
   }, []);
   const { user, fetchUser } = useUser();
+
   const generatePDF = async () => {
     if (!data || loading) return;
-    
     setGeneratingPDF(true);
     const getBase64ImageFromURL = async (url: string): Promise<string> => {
       const response = await fetch(url);
@@ -365,21 +364,38 @@ console.log ("fffff",productConversionRatesData),
     
     setGeneratingPDF(false);
   };
-  if (loading && !data) {
-    return <p>Loading dashboard...</p>;
+
+  // --- LOADER BLOCK ---
+  if (loading || generatingPDF) {
+    return (
+      <div className="bg-black min-h-screen w-full flex flex-col items-center justify-center">
+        <ClipLoader
+          color="orange"
+          loading={true}
+          size={80}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+          cssOverride={{ display: "block", margin: "80px auto", borderColor: "orange" }}
+        />
+        <div className="text-white text-center mt-6 text-lg animate-pulse">
+          {generatingPDF
+            ? "Génération du rapport PDF..."
+            : "Chargement des statistiques..."}
+        </div>
+      </div>
+    );
   }
+  // --- END LOADER BLOCK ---
 
   if (!data) {
-    return  (
+    return (
       <div className="bg-black min-h-screen w-full overflow-y-auto">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-white text-center text-2xl">No data available</h1>
-      </div>    
-      </div>)    
-   
- 
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-white text-center text-2xl">No data available</h1>
+        </div>
+      </div>
+    )
   }
-
 
   return (
     <div className="bg-black min-h-screen w-full overflow-y-auto">
@@ -396,10 +412,6 @@ console.log ("fffff",productConversionRatesData),
         />
         <div className="absolute top-1/2 left-10 transform -translate-y-1/2 text-white">
           <h1 className="text-4xl font-bold drop-shadow-lg">Quotations</h1>
-          {loading && (
-            <p className="text-lg drop-shadow-md mt-2">Chargement des données...</p>
-          )}
-          
           {!loading && (
             <button
               onClick={generatePDF}
@@ -427,54 +439,41 @@ console.log ("fffff",productConversionRatesData),
         </div>
       </div>
 
-      {/* Main content container - no relative positioning needed */}
+      {/* Main content container */}
       <div className="container mx-auto px-4 py-8">
-        {loading ? (
-          <div className="text-white text-center mt-20 text-lg animate-pulse">
-            Veuillez patienter pendant le chargement des statistiques...
-          </div>
-        ) : (
-          <>
-            {/* Cards Grid - comes first */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              <Card title="Converted Quotations" value={data!.convertedQuotations} />
-              <Card title="Conversion Rate" value={`${data!.conversionRate}%`} />
-              <Card title="Avg. Time to Convert" value={data!.averageTimeToConversion} />
-              <Card title="Total Quotations Created" value={data!.totalQuotationsCreated} />
-              <Card title="Avg. Products/Quotation" value={data!.averageProductsPerQuotation} />
-              <Card title="Avg. Quotation Value" value={`$${data!.averageQuotationValue}`} />
-              <Card title="New Customers" value={data!.newCustomers} />
-              <Card title="Existing Customers" value={data!.existingCustomers} />
-              <Card title="Total Customers" value={data!.totalCustomers} />
-              <Card title="Retention Rate" value={`${data!.CustomerRetentionRate}%`} />
-              <Card title="Conversion Rate" value={`${data!.conversionRate}%`} />
-            </div>
-
-            {/* Tables Section - comes after cards */}
-            <div className="space-y-8">
-              <Table
-                title="Most Quoted Products"
-                headers={["Product", "Count"]}
-                data={data!.mostQuotedProducts.map(p => [p.name, p.count!])}
-              />
-              
-              
-              <Table
-                title="Clients with Most Unconverted Quotations"
-                headers={["Client", "Unconverted Count"]}
-                data={data!.clientsWithMostUnconverted.map(c => [c.name, c.unconverted_count])}
-              />
-              <Table
-                title="Total Value by Product"
-                headers={["Product", "Total Value ($)"]}
-                data={data!.totalQuotationValueByProduct.map(p => [
-                  p.name || `Product #${p.product_id}`,
-                  `$${(p.total_value ?? 0).toFixed(2)}`
-                ])}
-              />
-            </div>
-          </>
-        )}
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <Card title="Converted Quotations" value={data.convertedQuotations} />
+          <Card title="Conversion Rate" value={`${data.conversionRate}%`} />
+          <Card title="Avg. Time to Convert" value={data.averageTimeToConversion} />
+          <Card title="Total Quotations Created" value={data.totalQuotationsCreated} />
+          <Card title="Avg. Products/Quotation" value={data.averageProductsPerQuotation} />
+          <Card title="Avg. Quotation Value" value={`  ${data.averageQuotationValue}  DA`} />
+          <Card title="New Customers" value={data.newCustomers} />
+          <Card title="Total Customers" value={data.totalCustomers} />
+          <Card title="Retention Rate" value={`${data.CustomerRetentionRate}%`} />
+        </div>
+        {/* Tables Section */}
+        <div className="space-y-8">
+          <Table
+            title="Most Quoted Products"
+            headers={["Product", "Count"]}
+            data={data.mostQuotedProducts.map(p => [p.name, p.count!])}
+          />
+          <Table
+            title="Clients with Most Unconverted Quotations"
+            headers={["Client", "Unconverted Count"]}
+            data={data.clientsWithMostUnconverted.map(c => [c.name, c.unconverted_count])}
+          />
+          <Table
+            title="Total Value by Product"
+            headers={["Product", "Total Value (DA)"]}
+            data={data.totalQuotationValueByProduct.map(p => [
+              p.name,
+              `DA ${(p.total_value ?? 0).toFixed(2)}`
+            ])}
+          />
+        </div>
       </div>
     </div>
   );
@@ -482,6 +481,7 @@ console.log ("fffff",productConversionRatesData),
 
 export default Dashboard;
 
+// If you use getBase64ImageFromURL in your PDF logic, define it here
 function getBase64ImageFromURL(arg0: string) {
   throw new Error("Function not implemented.");
 }

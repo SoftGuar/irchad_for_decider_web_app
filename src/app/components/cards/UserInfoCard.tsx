@@ -55,7 +55,7 @@ const UserInfoCard: React.FC<UserInfoCardProps> = ({ user, isEditing, onSave }) 
   };
 
   return (
-    <div className="bg-[#1E1E1E] p-6 rounded-lg shadow-md text-white">
+    <div className="bg-[#1E1E1E] p-8 rounded-lg shadow-md text-white ">
       <ul className="space-y-3 pl-16">
         {fields.map(({ name, label, value, editable }) => (
           <li className="flex items-center" key={name}>

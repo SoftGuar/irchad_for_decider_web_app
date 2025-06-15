@@ -1,4 +1,5 @@
 export interface Product {
+    product_name: any;
     product_id: number;
     name: string;
     count?: number;
@@ -7,6 +8,8 @@ export interface Product {
   }
   
   export interface Client {
+    user_first_name: any;
+    user_last_name: any;
     user_id: number;
     name: string;
     unconverted_count: number;

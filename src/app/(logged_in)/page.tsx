@@ -61,7 +61,7 @@ const Dashboard: React.FC = () => {
             count: item.count
           })),
           productConversionRates: productConversionRatesData.map((item: any) => ({
-            product_id: item.product_id,
+            product_name: item.product_name,
             name: item.name,
             conversion_rate: item.conversion_rate
           })),
@@ -154,10 +154,10 @@ const Dashboard: React.FC = () => {
             />
             <Table
               title="Total Value by Product"
-              headers={["Product", "Total Value ($)"]}
+              headers={["Product", "Total Value (DA)"]}
               data={data!.totalQuotationValueByProduct.map(p => [
-                p.name || `Product #${p.product_id}`,
-                `$${(p.total_value ?? 0).toFixed(2)}`
+                p.name || `Product #${p.product_name}`,
+                `DA ${(p.total_value ?? 0).toFixed(2)}`
               ])}
             />
           </>

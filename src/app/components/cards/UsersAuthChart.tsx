@@ -22,7 +22,7 @@ const UsersAuthChart: React.FC = () => {
         <div className="bg-[#262626] p-6 rounded-xl shadow">
           <h3 className="text-xl font-semibold mb-4">Utilisateurs actifs (Quotidien)</h3>
           <DailyChart />
-          <UserCommentsTable data={commentsData} />
+           
         </div>
 
         {/* Tableau des commentaires directement sous le graphique */}

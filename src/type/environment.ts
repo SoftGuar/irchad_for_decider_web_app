@@ -31,7 +31,11 @@ export interface POI {
     zone?: string,
 }
 
-interface History {
-    message:string,
-    timestamp: string,
-}
+interface ActivityHistoryProps {
+    title: string;
+    activities: Activity[];
+  }
+   interface Activity {
+    action: string;
+    createdAt: string;
+  }
