@@ -63,7 +63,8 @@ const Dashboard: React.FC = () => {
           averageTimeToConversion: `${averageTimeToConversionData.averageTimeToConversion} days`,
           mostQuotedProducts: mostQuotedProductsData.map((item: any) => ({
             product_id: item.product_id,
-            name: item.product_id,
+            name: item.product_name
+,
             count: item.count
           })),
           productConversionRates: productConversionRatesData.map((item: any) => ({
@@ -73,12 +74,13 @@ const Dashboard: React.FC = () => {
           })),
           totalQuotationValueByProduct: totalValueByProductData.map((item: any) => ({
             product_id: item.product_id,
-            name: item.name,
+            name: item.product_name
+,
             total_value: item.total_value
           })),
           clientsWithMostUnconverted: clientsWithMostUnconvertedData.map((item: any) => ({
             user_id: item.user_id,
-            name: item.name,
+            user_last_name: item.user_last_name,
             unconverted_count: item.unconverted_count
           })),
           totalQuotationsCreated: totalQuotationsCreatedData.totalQuotationsCreated,
@@ -89,6 +91,7 @@ const Dashboard: React.FC = () => {
           totalCustomers: SalesDetailsData.total_customers,
           CustomerRetentionRate: SalesDetailsData.retention_rate,
         });
+        console.log("Fetched data:",),
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -270,6 +273,7 @@ const Dashboard: React.FC = () => {
           fillColor: [51, 122, 183],
           textColor: [255, 255, 255], // White text
         },
+
         columnStyles: {
           0: { cellWidth: 60 },  // First column takes 50% of the table width
           1: { cellWidth: 60 },  // Second column takes 50% of the table width
@@ -463,7 +467,8 @@ const Dashboard: React.FC = () => {
           <Table
             title="Clients with Most Unconverted Quotations"
             headers={["Client", "Unconverted Count"]}
-            data={data.clientsWithMostUnconverted.map(c => [c.name, c.unconverted_count])}
+            data={data.clientsWithMostUnconverted.map(c => [c.user_last_name
+, c.unconverted_count])}
           />
           <Table
             title="Total Value by Product"

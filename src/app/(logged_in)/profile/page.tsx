@@ -64,22 +64,38 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="p-0 bg-black">
+    <div className="p-0 bg-[#262626]">
       <div className="w-full rounded-lg bg-red-600 ">
         <img src="/images/header.svg" />
       </div>
 
       <UserHeaderBar user={user} onEdit={() => setIsEditing(true)} />
 
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-6 p-8 ">
-        <div className="lg:col-span-2  mt-3 ">
-          <UserInfoCard user={user} isEditing={isEditing} onSave={handleSave} />
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-12 p-8 m">
+        <div className="lg:col-span-2 flex  ">
+          <UserInfoCard
+            user={{
+              userName: user.userName ?? user.username ?? "",
+              firstName: user.first_name ?? user.firstName ?? "",
+              lastName: user.last_name ?? user.lastName ?? "",
+              email: user.email ?? "",
+              phone: user.phone ?? "",
+              id: user.id ?? "",
+              avatar: user.avatar ?? "",
+              role: user.role ?? "",
+              joinedAt: user.joinedAt ?? user.createdAt ?? "",
+            }}
+            isEditing={isEditing}
+            onSave={handleSave}
+            className="w-full h-[450px]"
+          />
         </div>
-        <div className="lg:col-span-2  h-1/26">
+        <div className="lg:col-span-2 flex   ml-12">
           <ActivityHistoryCard
             title="Activity History"
             activities={activities}
             loading={loadingActivities}
+            className="w-full h-[450px]"
           />
         </div>
       </div>
