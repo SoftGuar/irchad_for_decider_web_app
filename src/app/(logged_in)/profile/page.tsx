@@ -65,8 +65,11 @@ const ProfilePage = () => {
 
   return (
     <div className="p-0 bg-[#262626]">
-      <div className="w-full rounded-lg bg-red-600 ">
-        <img src="/images/header.svg" />
+      <div className="w-full rounded-lg bg-red-600 relative">
+        <img src="/images/header.svg" className="w-full" alt="Header background" />
+        <div className="absolute inset-0 flex items-center px-10">
+          <h1 className="text-4xl font-bold text-white drop-shadow-lg">Profile Page</h1>
+        </div>
       </div>
 
       <UserHeaderBar user={user} onEdit={() => setIsEditing(true)} />
