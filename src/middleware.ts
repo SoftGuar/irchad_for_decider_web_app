@@ -7,7 +7,8 @@ export function middleware(request: NextRequest) {
 
   const isLoginPage = pathname === '/login';
    
-  if (isLoginPage && token) {
+  if (isLoginPage && token) 
+  {
     return NextResponse.redirect(new URL('/users_dashboard', request.url));
   }
   else if (pathname === '/') {
@@ -26,6 +27,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    
     /*
      * Match all request paths except for:
      * - api (API routes)
