@@ -74,8 +74,8 @@ const ProfilePage = () => {
 
       <UserHeaderBar user={user} onEdit={() => setIsEditing(true)} />
 
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-12 p-8 m">
-        <div className="lg:col-span-2 flex  ">
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-12 p-8">
+        <div className="lg:col-span-2 flex">
           <UserInfoCard
             user={{
               userName: user.userName ?? user.username ?? "",
@@ -93,7 +93,7 @@ const ProfilePage = () => {
             className="w-full h-[450px]"
           />
         </div>
-        <div className="lg:col-span-2 flex   ml-12">
+        <div className="lg:col-span-2 flex">
           <ActivityHistoryCard
             title="Activity History"
             activities={activities}

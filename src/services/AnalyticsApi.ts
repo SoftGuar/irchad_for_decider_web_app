@@ -25,7 +25,7 @@ export async function fetchCustomerRetentionDetails() {
 
 // Quotations Endpoints
 export async function fetchConvertedQuotationsCount() {
-  const response = await fetch(`http://localhost:2000/analytics/quotations/count-converted`);
+  const response = await fetch(`${API_URL}/analytics/quotations/count-converted`);
   if (!response.ok) throw new Error("Failed to fetch converted quotations count");
   return response.json();
 }

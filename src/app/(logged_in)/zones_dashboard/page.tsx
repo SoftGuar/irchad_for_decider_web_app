@@ -57,8 +57,25 @@ const TestDeviceStatus = () => {
 
   // Function to get zone name from zone_id (you might want to replace this with actual zone names)
   const getZoneName = (zoneId: number) => {
-    // You could replace this with a mapping of zone IDs to names if available
-    return `Zone ${zoneId}`;
+    const zoneNames: Record<number, string> = {
+      1: "Reception Area", 
+      2: "Main Lobby",
+      3: "Food Court",
+      4: "North Wing",
+      5: "South Wing",
+      6: "Conference Room",
+      7: "Exhibition Hall",
+      8: "Cafeteria",
+      9: "Parking Garage",
+      10: "Shopping District",
+      11: "Security Office",
+      12: "Medical Center",
+      13: "Information Desk",
+      14: "Elevator Area",
+      15: "Transportation Hub"
+    };
+    
+    return zoneNames[zoneId] || `Zone ${zoneId}`;
   };
 
   useEffect(() => {
@@ -742,14 +759,7 @@ const TestDeviceStatus = () => {
             <div className="bg-[#262626] p-6 rounded-xl shadow">
               <h3 className="text-lg text-white font-semibold mb-3">Successful Navigations</h3>
               <ReroutingBarChart />
-              <div className="bg-[#1a1a1a] p-4 rounded-lg shadow-inner border border-gray-700 mt-22">
-                <h4 className="text-md text-white font-semibold mb-2">Successful Navigations</h4>
-                <p className="text-2xl font-bold text-white">
-                  {
-                    succData.reduce((total: number, entry: any) => total + entry.success_rate, 0).toFixed(2)
-                  }
-                </p>
-              </div>
+              
             </div>
           </div>
         </section>

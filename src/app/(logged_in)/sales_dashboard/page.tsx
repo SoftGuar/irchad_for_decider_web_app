@@ -449,7 +449,7 @@ const Dashboard: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <Card title="Converted Quotations" value={data.convertedQuotations} />
           <Card title="Conversion Rate" value={`${data.conversionRate}%`} />
-          <Card title="Avg. Time to Convert" value={data.averageTimeToConversion} />
+          
           <Card title="Total Quotations Created" value={data.totalQuotationsCreated} />
           <Card title="Avg. Products/Quotation" value={data.averageProductsPerQuotation} />
           <Card title="Avg. Quotation Value" value={`  ${data.averageQuotationValue}  DA`} />
