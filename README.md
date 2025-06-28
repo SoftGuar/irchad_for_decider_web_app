@@ -38,7 +38,7 @@ A comprehensive React/Next.js dashboard application for decision makers to monit
 
 1. **Clone the repository**
 ```bash
-git clone <repository-url>
+git clone (https://github.com/SoftGuar/irchad_for_decider_web_app.git)
 cd irchad_front_decideur
 ```
 
