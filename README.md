@@ -101,8 +101,7 @@ src/
 │   └── notificationsApi.ts         # Notification services
 ├── type/                           # TypeScript type definitions
 │   ├── user.ts                     # User interfaces
-│   ├── device.ts                   # Device interfaces
-│   ├── notifications.ts            # Notification types
+│   │── notifications.ts            # Notification types
 │   └── environment.ts              # Environment/Zone types
 ├── utils/                          # Utility functions and contexts
 │   ├── userContext.tsx             # User state management
